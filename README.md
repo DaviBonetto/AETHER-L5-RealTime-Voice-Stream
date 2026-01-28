@@ -65,10 +65,10 @@ AETHER serves as the auditory cortex of the Titan Protocol:
 
 ```mermaid
 graph LR
-    Mic[🎤 Microphone] -->|Audio| Ears[👂 Whisper STT]
-    Ears -->|Text| Brain[🧠 Llama 3.3 (Groq)]
-    Brain -->|Text| Mouth[🗣️ Edge TTS]
-    Mouth -->|Audio Stream| Speaker[🔊 Output]
+    Mic["🎤 Microphone"] -->|Audio| Ears["👂 Whisper STT"]
+    Ears -->|Text| Brain["🧠 Llama 3.3 (Groq)"]
+    Brain -->|Text| Mouth["🗣️ Edge TTS"]
+    Mouth -->|Audio Stream| Speaker["🔊 Output"]
 
     style Brain fill:#f55036,stroke:#fff,stroke-width:2px,color:#fff
     style Ears fill:#3776ab,stroke:#fff,stroke-width:1px,color:#fff
