@@ -1,0 +1,8 @@
+groq
+edge-tts
+pyaudio
+pygame
+python-dotenv
+numpy
+colorama
+scipy
