@@ -40,7 +40,8 @@ def main():
                 console.print("[dim]Press ENTER to speak...[/]")
                 input() 
                 ui.show_listening()
-                success = audio.record(seconds=3, filename="input.wav")
+                # Increased to 15s per user request
+                success = audio.record(seconds=15, filename="input.wav")
                 if success:
                     try:
                         user_text = ear.transcribe("input.wav")
