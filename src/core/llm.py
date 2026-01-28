@@ -10,10 +10,13 @@ class GroqBrain:
     
     def think(self, user_text):
         self.history.append({"role": "user", "content": user_text})
-        completion = self.client.chat.completions.create(
-            messages=self.history,
-            model="llama3-70b-8192"
-        )
-        response = completion.choices[0].message.content
-        self.history.append({"role": "assistant", "content": response})
-        return response
+        try:
+            completion = self.client.chat.completions.create(
+                messages=self.history,
+                model="llama-3.3-70b-versatile"
+            )
+            response = completion.choices[0].message.content
+            self.history.append({"role": "assistant", "content": response})
+            return response
+        except Exception as e:
+            return f"Thinking Error: {str(e)}"
