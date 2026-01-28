@@ -64,15 +64,37 @@ AETHER serves as the auditory cortex of the Titan Protocol:
 ## 🏗️ Architecture
 
 ```mermaid
-graph LR
-    Mic["🎤 Microphone"] -->|Audio| Ears["👂 Whisper STT"]
-    Ears -->|Text| Brain["🧠 Llama 3.3 (Groq)"]
-    Brain -->|Text| Mouth["🗣️ Edge TTS"]
-    Mouth -->|Audio Stream| Speaker["🔊 Output"]
+graph TD
+    subgraph SENSORY_INPUT ["👂 Sensory Input Layer"]
+        Mic["🎤 Microphone Array"] -->|Raw Audio Stream| Buffer["🌊 PyAudio Buffer (15s)"]
+        Buffer -->|WAV Data| VAD["⚡ Voice Activity Detection"]
+        VAD -->|Segmented Audio| STT_API["📡 Groq API Gateway"]
+    end
 
-    style Brain fill:#f55036,stroke:#fff,stroke-width:2px,color:#fff
-    style Ears fill:#3776ab,stroke:#fff,stroke-width:1px,color:#fff
-    style Mouth fill:#0078d4,stroke:#fff,stroke-width:1px,color:#fff
+    subgraph COGNITIVE_CORE ["🧠 Neural Resonator (Groq LPU)"]
+        STT_API -->|JSON| Whisper["� Whisper-Large-v3"]
+        Whisper -->|Transcribed Text| Context["📂 Context Window (8k)"]
+
+        SystemPrompt["📜 System Prompt (Persona)"] .-> Context
+
+        Context -->|Prompt Engineering| Llama["💡 Llama-3.3-70b-Versatile"]
+        Llama -->|Inference Engine| Reasoning["⚙️ Cognitive Processing (<300ms)"]
+    end
+
+    subgraph SYNTHESIS_LAYER ["🗣️ Speech Synthesis Layer"]
+        Reasoning -->|Token Stream| TTS_Engine["� Edge-TTS (Neural)"]
+        TTS_Engine -->|Audio Blob| FX["🎛️ Audio Processing"]
+    end
+
+    subgraph OUTPUT_FEEDBACK ["🔊 Feedback Loop"]
+        FX -->|MP3 Playback| Speaker["� Audio Output"]
+        Reasoning -->|Text Stream| TUI["🖥️ Rich TUI Dashboard"]
+    end
+
+    style Llama fill:#f55036,stroke:#fff,stroke-width:2px,color:#fff
+    style Whisper fill:#3776ab,stroke:#fff,stroke-width:1px,color:#fff
+    style TTS_Engine fill:#0078d4,stroke:#fff,stroke-width:1px,color:#fff
+    style Buffer stroke-dasharray: 5 5
 ```
 
 ---
