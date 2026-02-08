@@ -32,7 +32,7 @@ _Bi-Directional Voice Stream • Ultra-Low Latency • TUI Dashboard_
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Star
 
 ```bash
 # Clone Repository
